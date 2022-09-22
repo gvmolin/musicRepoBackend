@@ -32,18 +32,16 @@ Backend made for the musicRepo app, a personal typescript/node project, still in
 - Database config
 - BaseEntity
 - Uuid config
+- Add users entity
 
 
 ## To do
 
-- Add users repository
 - Add albums repository
 - Add Musics repository
-
-- CRUD users
+- CRUD users (doing)
 - CRUD albums with dependencies on users
 - CRUD musics with dependencies on albuns and users
-
 - Auth
 
 ## Installation
