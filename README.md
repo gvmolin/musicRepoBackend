@@ -33,6 +33,7 @@ Backend made for the musicRepo app, a personal typescript/node project, still in
 - BaseEntity
 - Uuid config
 - Add users entity
+- bcrypt
 
 
 ## To do
