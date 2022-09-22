@@ -24,8 +24,24 @@
 
 ## Description
 
-Backend made for the musicRepo app, a personal typescript/node project in devolopment based on NestJS with TypeORM and Postgres.
+Backend made for the musicRepo app, a personal typescript/node project, still in devolopment and based on NestJS with TypeORM and Postgres.
 
+## Done
+
+-Basic Structure
+-Database config
+
+## To do
+
+-Add users repository
+-Add albums repository
+-Add Musics repository
+
+-CRUD users
+-CRUD albums with dependencies on users
+-CRUD musics with dependencies on albuns and users
+
+-Auth
 
 ## Installation
 
