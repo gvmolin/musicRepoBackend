@@ -28,20 +28,23 @@ Backend made for the musicRepo app, a personal typescript/node project, still in
 
 ## Done
 
-- -Basic Structure
-- -Database config
+- Basic Structure
+- Database config
+- BaseEntity
+- Uuid config
+
 
 ## To do
 
-- -Add users repository
-- -Add albums repository
-- -Add Musics repository
+- Add users repository
+- Add albums repository
+- Add Musics repository
 
-- -CRUD users
-- -CRUD albums with dependencies on users
-- -CRUD musics with dependencies on albuns and users
+- CRUD users
+- CRUD albums with dependencies on users
+- CRUD musics with dependencies on albuns and users
 
-- -Auth
+- Auth
 
 ## Installation
 
