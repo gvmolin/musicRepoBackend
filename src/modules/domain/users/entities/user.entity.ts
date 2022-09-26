@@ -3,7 +3,7 @@ import { BaseEntity } from 'src/core/common/base.entity';
 
 @Entity()
 export class User extends BaseEntity {
-  @Column()
+  @Column({ unique: true })
   username: string;
 
   @Column()

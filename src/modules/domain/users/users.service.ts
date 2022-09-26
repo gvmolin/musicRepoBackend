@@ -23,6 +23,13 @@ export class UsersService {
     return await this.userRepository.find();
   }
 
+  async findUser(user): Promise<User> {
+    const result = await this.userRepository.findOneOrFail({ where: user });
+    if (result) {
+      return result;
+    }
+  }
+
   findOne(id: number) {
     return `This action returns a #${id} user`;
   }

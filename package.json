@@ -27,6 +27,7 @@
     "@nestjs/platform-express": "^9.0.0",
     "@nestjs/typeorm": "^9.0.1",
     "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.2",
     "joi": "^17.6.1",
     "nestjs-joi": "^1.8.1",

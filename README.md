@@ -34,16 +34,20 @@ Backend made for the musicRepo app, a personal typescript/node project, still in
 - Uuid config
 - Add users entity
 - bcrypt
+- Auth
 
+
+## Doing
+
+- CRUD users
+- JWT guard
 
 ## To do
 
 - Add albums repository
 - Add Musics repository
-- CRUD users (doing)
 - CRUD albums with dependencies on users
 - CRUD musics with dependencies on albuns and users
-- Auth
 
 ## Installation
 
@@ -60,10 +64,6 @@ $ yarn start:dev
 # production mode
 $ npm run start:prod
 ```
-
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
 
 ## Stay in touch
 
