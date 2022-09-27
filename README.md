@@ -35,12 +35,12 @@ Backend made for the musicRepo app, a personal typescript/node project, still in
 - Add users entity
 - bcrypt
 - Auth
+- JWT guard
 
 
 ## Doing
 
 - CRUD users
-- JWT guard
 
 ## To do
 
