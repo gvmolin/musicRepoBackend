@@ -2,7 +2,7 @@ import { BaseEntity } from 'src/core/common/base.entity';
 import { JoiSchema } from 'nestjs-joi';
 import * as Joi from 'joi';
 
-export class CreateUserDto extends BaseEntity {
+export class CreateUserDto {
   @JoiSchema(Joi.string().required())
   username: string;
 

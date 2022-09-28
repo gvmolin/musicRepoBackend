@@ -62,7 +62,6 @@ export class AuthService {
 
   async logout(refreshStr): Promise<void> {
     const refreshToken = await this.retrieveRefreshToken(refreshStr);
-
     if (!refreshToken) {
       return;
     }
@@ -70,6 +69,7 @@ export class AuthService {
     this.refreshTokens = this.refreshTokens.filter(
       (refreshToken) => refreshToken.id !== refreshToken.id,
     );
+    console.log(this.refreshTokens);
   }
 
   async refresh(refreshStr: string): Promise<string | undefined> {
@@ -94,8 +94,10 @@ export class AuthService {
     refreshStr: string,
   ): Promise<RefreshToken | undefined> {
     try {
-      const decoded = verify(refreshStr, process.env.REFRESH_SECRET);
+      const decoded = verify(refreshStr, process.env.ACCESS_SECRET);
+      // console.log('decoded', decoded)
       if (typeof decoded === 'string') {
+        console.log('string');
         return undefined;
       }
       return Promise.resolve(
