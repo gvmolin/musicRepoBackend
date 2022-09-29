@@ -1,4 +1,3 @@
-import { BaseEntity } from 'src/core/common/base.entity';
 import { JoiSchema } from 'nestjs-joi';
 import * as Joi from 'joi';
 

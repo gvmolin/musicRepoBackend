@@ -4,6 +4,7 @@ import { UpdateMusicDto } from './dto/update-music.dto';
 import { Music } from './entities/music.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { HttpException } from '@nestjs/common';
 
 @Injectable()
 export class MusicsService {
@@ -18,14 +19,14 @@ export class MusicsService {
       if (!exists) {
         await this.musicRepository.save(createMusicDto);
         console.log('music created');
+        return true;
       } else {
         console.log('ERROR music name already in use');
-        return;
+        return new HttpException('ERROR, music name already in use', 422);
       }
       //
     } catch (error) {
-      console.log('error on create music');
-      console.log(error);
+      throw new Error(error);
     }
   }
 

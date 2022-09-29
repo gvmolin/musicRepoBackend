@@ -13,22 +13,22 @@ export class BaseEntity extends TypeOrmBaseEntity {
 
   @CreateDateColumn({
     type: 'timestamp',
-    name: 'criado_em',
+    name: 'created',
   })
   created: Date;
 
   @UpdateDateColumn({
     type: 'timestamp',
-    name: 'atualizado_em',
+    name: 'updated',
   })
   updated: Date;
 
   @DeleteDateColumn({
     type: 'timestamp',
-    name: 'deletado_em',
+    name: 'deleted',
   })
   deleted: Date;
 
   @Column({ nullable: true, type: 'uuid' })
-  atualizadoPor: Uuid;
+  updatedBy: Uuid;
 }
