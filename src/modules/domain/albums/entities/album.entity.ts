@@ -6,6 +6,9 @@ import { User } from '../../users/entities/user.entity';
 @Entity()
 export class Album extends BaseEntity {
   @Column()
+  artist: string;
+
+  @Column()
   name: string;
 
   @Column({ nullable: true })
@@ -17,5 +20,5 @@ export class Album extends BaseEntity {
 
   @ManyToOne(() => User, (user) => user.id)
   @JoinColumn({ name: 'user' })
-  createdBy: User[];
+  createdBy: Uuid;
 }

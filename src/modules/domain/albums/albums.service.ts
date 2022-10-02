@@ -1,11 +1,19 @@
 import { Injectable } from '@nestjs/common';
 import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
+import { Album } from './entities/album.entity';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AlbumsService {
+  constructor(
+    @InjectRepository(Album)
+    private albumRepository: Repository<Album>,
+  ) {}
+
   create(createAlbumDto: CreateAlbumDto) {
-    return 'This action adds a new album';
+    return this.albumRepository.save(createAlbumDto);
   }
 
   findAll() {
