@@ -13,18 +13,13 @@ export class MusicsService {
     private musicRepository: Repository<Music>,
   ) {}
 
-  async create(createMusicDto: CreateMusicDto) {
+  async create(musicsArr: CreateMusicDto[]) {
     try {
-      const exists = await this.findMusic(createMusicDto);
-      if (!exists) {
-        await this.musicRepository.save(createMusicDto);
-        console.log('music created');
-        return true;
-      } else {
-        console.log('ERROR music name already in use');
-        return new HttpException('ERROR, music name already in use', 422);
-      }
-      //
+      musicsArr.forEach(async (music: CreateMusicDto) => {
+        await this.musicRepository.save(music);
+        console.log(`>>> Music '${music.name}' created.`);
+      });
+      return new HttpException('Created', 201);
     } catch (error) {
       throw new Error(error);
     }
@@ -36,13 +31,13 @@ export class MusicsService {
 
   async findMusic(param): Promise<Music> {
     try {
-      console.log('searching music');
+      console.log(`>>> Searching ${param} music`);
       const result = await this.musicRepository.findOneOrFail({ where: param });
       if (result) {
-        console.log('found');
+        console.log(`>>> Music '${param}' found`);
         return result;
       } else {
-        console.log('music not found');
+        console.log(`>>> Music '${param}' not found`);
       }
     } catch (error) {}
   }

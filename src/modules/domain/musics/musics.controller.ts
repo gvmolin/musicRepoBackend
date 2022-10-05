@@ -19,11 +19,11 @@ import { HttpStatus } from '@nestjs/common';
 export class MusicsController {
   constructor(private readonly musicsService: MusicsService) {}
 
-  @UseGuards(JwtAuthGuard)
   @Post()
+  @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK || HttpStatus.UNPROCESSABLE_ENTITY)
-  async create(@Body() createMusicDto: CreateMusicDto) {
-    return await this.musicsService.create(createMusicDto);
+  async create(@Body() musicsArr: CreateMusicDto[]) {
+    return await this.musicsService.create(musicsArr);
   }
 
   @Get()
