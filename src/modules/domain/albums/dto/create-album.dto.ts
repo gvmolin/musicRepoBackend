@@ -12,8 +12,5 @@ export class CreateAlbumDto {
   artist: string;
 
   @JoiSchema(Joi.string())
-  album: string;
-
-  @JoiSchema(Joi.string())
   cover: string;
 }

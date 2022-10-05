@@ -36,24 +36,36 @@ Backend made for the musicRepo app, a personal typescript/node project, still in
 - bcrypt
 - Auth
 - JWT guard
+- CREATE users
+- CREATE albums
+- CREATE musics
+- Relationship between albums and musics
+- Upload files method
 
 
 ## Doing
 
 - CRUD users
+- CRUD albums
+- CRUD musics
+- stream files method
 
 ## To do
 
-- Add albums repository
-- Add Musics repository
-- CRUD albums with dependencies on users
-- CRUD musics with dependencies on albuns and users
+- Playlists entity and cruds.
+- Pagination
+- Filters, orders
+- Search
+- Validations
 
 ## Installation
 
 ```bash
 $ yarn install
 ```
+- Then setup a docker with a postgres database.
+- Fill the .env fields.
+- Run the application.
 
 ## Running the app
 
