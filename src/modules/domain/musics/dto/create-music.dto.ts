@@ -4,4 +4,7 @@ import * as Joi from 'joi';
 export class CreateMusicDto {
   @JoiSchema(Joi.string().required())
   name: string;
+
+  @JoiSchema(Joi.string().required())
+  file: string;
 }

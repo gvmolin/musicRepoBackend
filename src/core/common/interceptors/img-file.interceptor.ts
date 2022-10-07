@@ -10,7 +10,7 @@ export const multerConfig = {
 };
 
 // Multer upload options
-export const multerOptions = {
+export const multerImageOptions = {
   // Enable file size limits
   limits: {
     // fileSize: +process.env.MAX_FILE_SIZE,
@@ -35,7 +35,7 @@ export const multerOptions = {
   storage: diskStorage({
     // Destination storage path details
     destination: (req: any, file: any, cb: any) => {
-      const uploadPath = multerConfig.dest;
+      const uploadPath = '~/../imageFiles';
       // Create folder if doesn't exist
       if (!existsSync(uploadPath)) {
         mkdirSync(uploadPath);
@@ -45,6 +45,38 @@ export const multerOptions = {
     // File modification details
     filename: (req: any, file: any, cb: any) => {
       // Calling the callback passing the random name generated with the original extension name
+      cb(null, `${uuid()}${extname(file.originalname)}`);
+    },
+  }),
+};
+
+export const multerAudioOptions = {
+  limits: {
+    // fileSize: +process.env.MAX_FILE_SIZE,
+  },
+  fileFilter: (req: any, file: any, cb: any) => {
+    if (file.mimetype.match(/\/(mp3|wav|wma|flac|aac|mpeg)$/)) {
+      // Allow storage of file
+      cb(null, true);
+    } else {
+      cb(
+        new HttpException(
+          `Unsupported file type ${extname(file.originalname)}`,
+          HttpStatus.BAD_REQUEST,
+        ),
+        false,
+      );
+    }
+  },
+  storage: diskStorage({
+    destination: (req: any, file: any, cb: any) => {
+      const uploadPath = '~/../audioFiles';
+      if (!existsSync(uploadPath)) {
+        mkdirSync(uploadPath);
+      }
+      cb(null, uploadPath);
+    },
+    filename: (req: any, file: any, cb: any) => {
       cb(null, `${uuid()}${extname(file.originalname)}`);
     },
   }),

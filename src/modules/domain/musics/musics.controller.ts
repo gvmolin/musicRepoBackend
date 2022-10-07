@@ -8,12 +8,16 @@ import {
   Delete,
   UseGuards,
   HttpCode,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { MusicsService } from './musics.service';
 import { CreateMusicDto } from './dto/create-music.dto';
 import { UpdateMusicDto } from './dto/update-music.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HttpStatus } from '@nestjs/common';
+import { multerAudioOptions } from 'src/core/common/interceptors/img-file.interceptor';
 
 @Controller('musics')
 export class MusicsController {
@@ -22,8 +26,10 @@ export class MusicsController {
   @Post()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.OK || HttpStatus.UNPROCESSABLE_ENTITY)
-  async create(@Body() musicsArr: CreateMusicDto[]) {
-    return await this.musicsService.create(musicsArr);
+  @UseInterceptors(FileInterceptor('file', multerAudioOptions))
+  create(@Body() body: CreateMusicDto, @UploadedFile() file) {
+    body.file = file.filename;
+    return this.musicsService.create(body);
   }
 
   @Get()

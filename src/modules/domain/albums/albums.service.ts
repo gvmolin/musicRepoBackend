@@ -17,7 +17,11 @@ export class AlbumsService {
   }
 
   findAll() {
-    return `This action returns all albums`;
+    try {
+      return this.albumRepository.find();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   findOne(id: number) {

@@ -13,20 +13,26 @@ export class MusicsService {
     private musicRepository: Repository<Music>,
   ) {}
 
-  async create(musicsArr: CreateMusicDto[]) {
+  async create(music: CreateMusicDto) {
     try {
-      musicsArr.forEach(async (music: CreateMusicDto) => {
-        await this.musicRepository.save(music);
-        console.log(`>>> Music '${music.name}' created.`);
-      });
-      return new HttpException('Created', 201);
+      // musicsArr.forEach(async (music: CreateMusicDto) => {
+      const res = await this.musicRepository.save(music);
+      console.log(`>>> Music '${music.name}' created.`);
+      // });
+      return new HttpException(res, 201);
     } catch (error) {
       throw new Error(error);
     }
   }
 
   findAll() {
-    return `This action returns all musics`;
+    try {
+      return this.musicRepository.find({
+        relations: ['album'],
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   async findMusic(param): Promise<Music> {

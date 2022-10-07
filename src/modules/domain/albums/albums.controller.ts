@@ -18,7 +18,7 @@ import { CreateAlbumDto } from './dto/create-album.dto';
 import { UpdateAlbumDto } from './dto/update-album.dto';
 import { CurrentUser } from 'src/core/common/decorators/current-user.decorator';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { multerOptions } from 'src/core/common/interceptors/img-file.interceptor';
+import { multerImageOptions } from 'src/core/common/interceptors/img-file.interceptor';
 
 @Controller('albums')
 export class AlbumsController {
@@ -27,24 +27,15 @@ export class AlbumsController {
   @Post()
   @UseGuards(JwtAuthGuard)
   @HttpCode(HttpStatus.CREATED || HttpStatus.UNPROCESSABLE_ENTITY)
-  @UseInterceptors(FileInterceptor('file', multerOptions))
+  @UseInterceptors(FileInterceptor('file', multerImageOptions))
   create(
     @Body() body: CreateAlbumDto,
     @CurrentUser() user: any,
     @UploadedFile() file,
   ) {
-    console.log(body);
-    console.log(file);
     body.createdBy = user;
     body.cover = file.filename;
     return this.albumsService.create(body);
-  }
-
-  @Post('cover') //just testing
-  @UseInterceptors(FileInterceptor('file', multerOptions))
-  createFile(@UploadedFile() file, @Body() body) {
-    console.log(body);
-    console.log(file);
   }
 
   @Get()
