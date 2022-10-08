@@ -5,6 +5,10 @@ import { Music } from './entities/music.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { HttpException } from '@nestjs/common';
+import {
+  paginator,
+  PaginationQuery,
+} from 'src/core/common/utils/pagination-program';
 
 @Injectable()
 export class MusicsService {
@@ -15,21 +19,38 @@ export class MusicsService {
 
   async create(music: CreateMusicDto) {
     try {
-      // musicsArr.forEach(async (music: CreateMusicDto) => {
       const res = await this.musicRepository.save(music);
       console.log(`>>> Music '${music.name}' created.`);
-      // });
       return new HttpException(res, 201);
     } catch (error) {
       throw new Error(error);
     }
   }
 
-  findAll() {
+  async findAll(query: PaginationQuery) {
     try {
-      return this.musicRepository.find({
-        relations: ['album'],
+      const pagination = paginator(query);
+      const res = await this.musicRepository.findAndCount({
+        relations: { album: true },
+        ...pagination,
       });
+      console.log(res);
+      return {
+        result: [...res[0]],
+        pagination: {
+          page: query.page,
+          limit: query.limit,
+          totalItems: res[1],
+          totalPages: Math.ceil(res[1] / query.limit),
+        },
+      };
+      // return this.musicRepository
+      //   .createQueryBuilder('musics')
+      //   .leftJoinAndSelect('musics.album', 'album')
+      //   .skip(pagination.skip)
+      //   .limit(pagination.take)
+      //   .where
+      //   .getMany();
     } catch (error) {
       console.log(error);
     }

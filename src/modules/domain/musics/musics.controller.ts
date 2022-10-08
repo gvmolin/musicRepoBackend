@@ -10,6 +10,7 @@ import {
   HttpCode,
   UseInterceptors,
   UploadedFile,
+  Query,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { MusicsService } from './musics.service';
@@ -18,6 +19,7 @@ import { UpdateMusicDto } from './dto/update-music.dto';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { HttpStatus } from '@nestjs/common';
 import { multerAudioOptions } from 'src/core/common/interceptors/img-file.interceptor';
+import { PaginationQuery } from 'src/core/common/utils/pagination-program';
 
 @Controller('musics')
 export class MusicsController {
@@ -33,8 +35,10 @@ export class MusicsController {
   }
 
   @Get()
-  findAll() {
-    return this.musicsService.findAll();
+  @UseGuards(JwtAuthGuard)
+  findAll(@Query() query: PaginationQuery) {
+    console.log(query);
+    return this.musicsService.findAll(query);
   }
 
   @Get(':id')

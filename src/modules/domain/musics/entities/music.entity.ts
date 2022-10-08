@@ -10,7 +10,7 @@ export class Music extends BaseEntity {
   @Column({ nullable: true })
   file: string;
 
-  @ManyToOne(() => Album, (album) => album.id)
+  @ManyToOne(() => Album, (album) => album)
   @Column({ nullable: false })
   @JoinColumn({ name: 'album' })
   album: Album;
